@@ -34,7 +34,7 @@ def play_game():
         flip_player()
 
     if winner=="X" or winner=="O":
-        print(winner + "Won.")
+        print(winner + " Won.")
     elif winner==None:
         print("Tie.")
 
@@ -63,13 +63,13 @@ def check_for_winner():
     dignol_winner=check_diagnol()
 
     if row_winner:
-        winner=row_winner()
+        winner=row_winner
     
     elif col_winner:
-        winner=colw_winner()
+        winner=col_winner
 
     elif dignol_winner:
-        winner=dignol_winner()
+        winner=dignol_winner
 
     else:
         winner=None
@@ -112,7 +112,7 @@ def check_col():
     global game_on
     col_1=board[0]==board[3]==board[6] != "_"
     col_2=board[1]==board[4]==board[7] != "_"
-    col_3=board[3]==board[5]==board[8] != "_"
+    col_3=board[2]==board[5]==board[8] != "_"
     
     if col_1 or col_2 or col_3:
         game_on= False
@@ -124,7 +124,7 @@ def check_col():
         return board[1]
 
     elif col_3:
-        return board[3]    
+        return board[2]    
 
     return
 
