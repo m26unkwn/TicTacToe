@@ -36,15 +36,32 @@ def play_game():
     if winner=="X" or winner=="O":
         print(winner + " Won.")
     elif winner==None:
-        print("Tie.")
+        print(" Tie.")
 
 
 
 def handle_turn(player):
-    position=int(input("Enter any number in range 1-9: ")) #Here asking for user to which postion he want to put his turn
-    position= position-1 # Updating the value with index value
+
+
+    print(player+"'s, turn")
+
+    #Here asking for user to which postion he want to put his turn
+    position=input("Enter any number in range 1-9: ")
+    valid=False
+    while not valid:
+        while position not in["1", "2", "3", "4", "5", "6" , "7", "8", "9"]:
+            position=input("Invalid input choose a position in range 1-9: ")
+            
+        position= int(position)-1 # Updating the value with index value
+
+        if board[position]=="_":
+            valid=True
+        else:
+            print("Position is filled. Try Again!")
+        
+        board[position]=player
+
     
-    board[position]=str(input("Enter X or O: ")).upper()
     display_board()
  
 def check_if_game_over():
@@ -60,7 +77,7 @@ def check_for_winner():
     #checkForcol
     col_winner=check_col()
     #check For Coldiagnol winner
-    dignol_winner=check_diagnol()
+    diagnol_winner=check_diagnol()
 
     if row_winner:
         winner=row_winner
@@ -68,8 +85,8 @@ def check_for_winner():
     elif col_winner:
         winner=col_winner
 
-    elif dignol_winner:
-        winner=dignol_winner
+    elif diagnol_winner:
+        winner=diagnol_winner
 
     else:
         winner=None
@@ -79,12 +96,13 @@ def check_for_winner():
 
 
 def check_if_tie():
+    global game_on
+    if "_" not in board:
+        game_on=False
 
     return
 
 
-def flip_player():
-    return
 
 
 def check_row():
@@ -144,6 +162,13 @@ def check_diagnol():
     return
     
 
+def flip_player():
+    global current_player
+    if current_player=="X":
+        current_player="O"
+    elif current_player=="O":
+        current_player="X"
+    return
 
 
 play_game()
